@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ut+qvT3MH9Lm9mPlnjUG3RypoTD5AZGgT3aohrxhliXtxhXJnmEtQHJfw7DsTyZT77yjqMfQnGNs81lJ2DI8DQ==",
+  "dgSpecHash": "Tbcdi9QhOww=",
   "success": true,
-  "projectFilePath": "C:\\Users\\opilane\\source\\repos\\Allan Lond TARpe23\\ContosoUniversity\\ContosoUniversity\\ContosoUniversity.csproj",
+  "projectFilePath": "C:\\Users\\opilane\\source\\repos\\Allan Lond TARpe23\\ContosoUniversity\\ContosoUniversity.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\opilane\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\opilane\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

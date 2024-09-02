@@ -17,7 +17,7 @@ namespace ContosoUniversity.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Students.ToListAsync());
-        }
+        }      
         /*public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -66,5 +66,10 @@ namespace ContosoUniversity.Controllers
             int pageSize = 3;
             return View(await _context.Students.ToListAsync));
         }*/  
-    }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+    }           
 }

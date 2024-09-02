@@ -28,3 +28,15 @@ C:\Users\opilane\source\repos\Allan Lond TARpe23\ContosoUniversity\ContosoUniver
 C:\Users\opilane\source\repos\Allan Lond TARpe23\ContosoUniversity\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.pdb
 C:\Users\opilane\source\repos\Allan Lond TARpe23\ContosoUniversity\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.genruntimeconfig.cache
 C:\Users\opilane\source\repos\Allan Lond TARpe23\ContosoUniversity\ContosoUniversity\obj\Debug\net8.0\ref\ContosoUniversity.dll
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.csproj.AssemblyReference.cache
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.AssemblyInfoInputs.cache
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.AssemblyInfo.cs
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.RazorAssemblyInfo.cache
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.RazorAssemblyInfo.cs
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.sourcelink.json
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.dll
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\refint\ContosoUniversity.dll
+C:\Users\HP\Documents\Visual Studio save\Contoso-University\ContosoUniversity\obj\Debug\net8.0\ContosoUniversity.pdb

@@ -17,7 +17,7 @@ namespace ContosoUniversity.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Students.ToListAsync());
-        }      
+        }
         /*public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -65,11 +65,58 @@ namespace ContosoUniversity.Controllers
 
             int pageSize = 3;
             return View(await _context.Students.ToListAsync));
-        }*/  
+        }*/
 
         public IActionResult Create()
         {
             return View();
         }
-    }           
+
+        //create meetod, sisaldab andmebaasi uue õpilase. Insert new student into database
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Students.Add(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(student);
+        }
+
+       
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.Students
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return View(student);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+    }
 }

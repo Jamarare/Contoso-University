@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ContoUniversity.Models.Student>
+﻿@model IEnumerable<ContosoUniversity.Models.Student>
 
 @{
-    ViweData["Tiltle"] = "Index";
+    ViewData["Tiltle"] = "Index";
 }
 
 <h1>Õpilaste Index</h1>
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(Model => Model.FirstMidName)
             </th>
             <th>
-                @Html.DisplayNameFor(Model => Model.Enrollmentdate)
+                @Html.DisplayNameFor(Model => Model.EnrollmentDate)
             </th>
             <th></th>
         </tr>
@@ -29,13 +29,13 @@
         {
             <tr>
                  <td>
-                     @Html.DisplayFor(modelItem) => item.LastName)
+                     @Html.DisplayFor(modeItem => item.LastName)
                  </td>
                  <td>
-                     @Html.DisplayFor(modelItem) => item.FirstMidName)
+                     @Html.DisplayFor(modeItem => item.FirstMidName)
                  </td>
                  <td>
-                     @Html.DisplayFor(modelItem) => item.EnrollmentDate)
+                     @Html.DisplayFor(modeItem => item.EnrollmentDate)
                  </td>
                  <td>
                      <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>

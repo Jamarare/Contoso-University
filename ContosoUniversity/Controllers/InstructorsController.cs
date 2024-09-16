@@ -1,18 +1,21 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models;
+using ContosoUniversity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace ContosoUniversity.Controllers
 {
     public class InstructorsController : Controller
     {
         private readonly SchoolContext _context;
+
         public InstructorsController(SchoolContext context)
         {
             _context = context;
         }
-
+        [HttpGet]
         public async Task<IActionResult> Index(int? id, int? courseId)
         {
             var vm = new InstructorIndexData();
@@ -30,7 +33,7 @@ namespace ContosoUniversity.Controllers
 
             if (id != null)
             {
-                ViewData["InstructorID"] = id.Value;
+                ViewData["InstructorId"] = id.Value;
                 Instructor instructor = vm.Instructors
                     .Where(i => i.ID == id.Value).Single();
                 vm.Courses = instructor.CourseAssignments
@@ -49,5 +52,56 @@ namespace ContosoUniversity.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var instructor = new Instructor();
+            instructor.CourseAssignments = new List<CourseAssignment>();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Instructor instructor)
+        {
+            /*if (selectedCourse == null)
+            {
+                instructor.CourseAssignments = new List<CourseAssignment>();
+                foreach (var course in selectedCourse)
+                {
+                    var courseToAdd = new CourseAssignment
+                    {
+                        InstructorId = instructor.Id,
+                        CourseId = course
+                    };
+                    instructor.CourseAssignments.Add(courseToAdd);
+                }
+            }*/
+            //ModelState.Remove(selectedCourse);
+            if (ModelState.IsValid)
+            {
+                _context.Add(instructor);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(instructor);
+        }
+
+        private void PopulateAssignedCourseData(Instructor instructor)
+        {
+            var allCourses = _context.Courses;
+            var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.CourseID));
+            var vm = new List<AssignedCourseData>();
+            foreach (var course in allCourses)
+            {
+                vm.Add(new AssignedCourseData
+                {
+                    CourseId = course.CourseID,
+                    Title = course.Title,
+                    Assigned = instructorCourses.Contains(course.CourseID)
+                });
+            }
+            ViewData["Courses"] = vm;
+        }
     }
 }

@@ -165,7 +165,7 @@ namespace ContosoUniversity.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InstructorExists(instructor.ID))
+                    if (!Instructor(instructor.ID))
                     {
                         return NotFound();
                     }
@@ -179,10 +179,32 @@ namespace ContosoUniversity.Controllers
             return View(instructor);
         }
 
-        private bool InstructorExists(int id)
+        private bool Instructor(int id)
         {
             throw new NotImplementedException();
         }
 
+        public async Task<IActionResult> Clone(int id)
+        {
+            var instructor = await _context.Instructors.FindAsync(id);
+
+            if (instructor == null)
+            {
+                return NotFound();
+            }
+
+            var ClonedInstructor = new Instructor
+            {
+                LastName = instructor.LastName,
+                FirstMidName = instructor.FirstMidName,
+                HireDate = instructor.HireDate,
+            };
+
+            _context.Instructors.Add(ClonedInstructor);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+
+        }
     }
 }

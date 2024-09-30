@@ -1,20 +1,22 @@
 ﻿@model ContosoUniversity.Models.InstructorIndexData
 @{
-    ViewData["title"] = "Instructors";
+    ViewData["Title"] = "Instructors";
 }
-<h2>instructors</h2>
+<h2>Instructors</h2>
 <p>
-    <a asp-action="Create">Create New instructor</a>
+    <a class="btn btn-primary mb-3" asp-action="Create">Create New Instructor</a>
 </p>
 
-<tabel class="table">
-    <thead>
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>Last Name</th>
             <th>First Name</th>
             <th>Hire Date</th>
             <th>Office Location</th>
-            <th></th>
+            <th>Courses</th>
+            <th>Birthday</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -25,30 +27,30 @@
             {
                 selectedRow = "table-success";
             }
-            <tr> class="@selectedRow">
+            <tr class="@selectedRow">
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+
                 <td>@Html.DisplayFor(modelItem => item.FirstMidName)</td>
+
                 <td>@Html.DisplayFor(modelItem => item.HireDate)</td>
-                <td>
-                    @if (item.OfficeAssignment != null)
-                    {
-                        @item.OfficeAssignment.Location
-                    }
-                </td>
+
+                <td>@Html.DisplayFor(modelItem => item.OfficeAssignment.Location)</td>
                 <td>
                     @foreach (var courses in item.CourseAssignments)
                     {
-                        @courses.Course.CourseID @: @courses.Course.Title <br />
+                        @courses.Course.Title <br />
                     }
                 </td>
-                <td>@Html.DisplayFor(modelItem => item.NicotineNeeded)</td>
+
+                <td>@Html.DisplayFor(modelItem => item.Birthday)</td>
+
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    <a asp-action="Clone" asp-route-id="@item.ID">Clone</a>
+                    <a class="btn btn-primary btn-sm m-1" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                    <a class="btn btn-info btn-sm m-1" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    <a class="btn btn-danger btn-sm m-1" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a class="btn btn-secondary btn-sm m-1" asp-action="Clone" asp-route-id="@item.ID">Clone</a>
                 </td>
             </tr>
         }
     </tbody>
-</tabel>
+</table>

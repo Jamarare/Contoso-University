@@ -1,9 +1,7 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models;
-using ContosoUniversity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace ContosoUniversity.Controllers
 {
@@ -71,8 +69,8 @@ namespace ContosoUniversity.Controllers
                 {
                     var courseToAdd = new CourseAssignment
                     {
-                        InstructorId = instructor.Id,
-                        CourseId = course
+                        Instructor = instructor,
+                        Course = course
                     };
                     instructor.CourseAssignments.Add(courseToAdd);
                 }
@@ -84,6 +82,7 @@ namespace ContosoUniversity.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            //PopulateAssignedCourseData(instructor);
             return View(instructor);
         }
 
@@ -198,6 +197,7 @@ namespace ContosoUniversity.Controllers
                 LastName = instructor.LastName,
                 FirstMidName = instructor.FirstMidName,
                 HireDate = instructor.HireDate,
+                OfficeAssignment = instructor.OfficeAssignment,
             };
 
             _context.Instructors.Add(ClonedInstructor);

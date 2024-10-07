@@ -48,16 +48,17 @@ namespace ContosoUniversity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Budget,StartDate,RowVersion,InstructorId,Aadress,Status")] Department department)
+        public async Task<IActionResult> Create([Bind("Name,Budget,StartDate,RowVersion,InstructorId,Aadress")] Department department)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(department);
+                _context.Departments.Add(department);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorId"] = new SelectList(_context.Instructors, "Id", "FullName", department.InstructorId);
+            ViewData["InstructorId"] = new SelectList(_context.Instructors, "Id", "FullName");
             return View(department);
         }
+
     }
 }

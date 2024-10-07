@@ -38,9 +38,9 @@ namespace ContosoUniversity.Models
 
         //Igaühel on oma kolm  unikaalset propertyt
 
-        public int Birthday { get; set; }
+        public int? Birthday { get; set; }
 
-        public int WorkYears { get; set; }
+        public int? WorkYears { get; set; }
 
         [Display(Name = "Nicotine #:")]
         public NicotineNeeded? NicotineNeeded { get; set; }

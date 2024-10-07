@@ -17,11 +17,10 @@ namespace ContosoUniversity.Models
         public DateTime StartDate { get; set; }
 
         public Student? Status { get; set; }
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
         public string Aadress { get; set; }
         [StringLength(30, MinimumLength = 5)]
         public int? InstructorId { get; set; }
-        [Timestamp]
         public byte? RowVersion { get; set; }
         public Instructor? Administrator { get; set; }
         public ICollection<Course>? Courses { get; set; }

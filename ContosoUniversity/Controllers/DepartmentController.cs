@@ -21,6 +21,12 @@ namespace ContosoUniversity.Controllers
             return View(await schoolContext.ToListAsync());
         }
 
+        private bool DepartmentExists(int id)
+        {
+            return _context.Departments.Any(e => e.DepartmentId == id);
+        }
+
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -162,5 +168,57 @@ namespace ContosoUniversity.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var department = await _context.Departments.FindAsync(id);
+            if (department == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.InstructorID = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorId);
+            return View(department);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Department department)
+        {
+            if (id != department.DepartmentId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(department);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!DepartmentExists(department.DepartmentId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.InstructorID = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorId);
+            return View(department);
+        }
+
     }
 }

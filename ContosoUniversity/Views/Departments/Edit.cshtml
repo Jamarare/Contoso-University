@@ -1,0 +1,34 @@
+﻿@model ContosoUniversity.Models.Department
+
+<h2>Edit Department</h2>
+
+<form asp-action="Edit">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Budget" class="control-label"></label>
+        <input asp-for="Budget" class="form-control" />
+        <span asp-validation-for="Budget" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label"></label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Aadress" class="control-label"></label>
+        <input asp-for="Aadress" class="form-control" />
+        <span asp-validation-for="Aadress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="InstructorId" class="control-label"></label>
+        <select asp-for="InstructorId" asp-items="ViewBag.InstructorID" class="form-control"></select>
+        <span asp-validation-for="InstructorId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

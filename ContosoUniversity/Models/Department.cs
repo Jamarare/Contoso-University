@@ -7,19 +7,22 @@ namespace ContosoUniversity.Models
     {
         [Key]
         public int DepartmentId { get; set; }
-        [StringLength(50, MinimumLength = 3)]
+
+        [Required]
+        [StringLength(50)]
         public string Name { get; set; }
         [DataType(DataType.Currency)]
+
         [Column(TypeName = "Money")]
         public decimal Budget { get; set; }
         [DataType(DataType.Date)]
+
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         public Student? Status { get; set; }
         public int? StudentId { get; set; }
-        public string Aadress { get; set; }
-        [StringLength(30, MinimumLength = 5)]
+        public string? Aadress { get; set; }
         public int? InstructorId { get; set; }
         public byte? RowVersion { get; set; }
         public Instructor? Administrator { get; set; }

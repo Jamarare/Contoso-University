@@ -42,21 +42,92 @@ namespace ContosoUniversity.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewData["InstructorId"] = new SelectList(_context.Instructors, "Id", "FullName");
+            ViewBag.InstructorId = new SelectList(_context.Instructors, "ID", "FullName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Budget,StartDate,RowVersion,InstructorId,Aadress")] Department department)
+        public async Task<IActionResult> Create(Department department)
         {
             if (ModelState.IsValid)
             {
-                _context.Departments.Add(department);
+                _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorId"] = new SelectList(_context.Instructors, "Id", "FullName");
+
+            ViewBag.InstructorId = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorId);
+            return View(department);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BaseOn(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var department = await _context.Departments
+                .FirstOrDefaultAsync(m => m.DepartmentId == id);
+
+            if (department == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.InstructorId = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorId);
+            return View(department);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BaseOn(int id, string action, Department department)
+        {
+            if (action == "Make")
+            {
+                var newDepartment = new Department
+                {
+                    Name = department.Name,
+                    Budget = department.Budget,
+                    StartDate = department.StartDate,
+                    StudentId = department.StudentId,
+                    Aadress = department.Aadress,
+                    InstructorId = department.InstructorId
+                };
+
+                _context.Departments.Add(newDepartment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            else if (action == "MakeAndDeleteOld")
+            {
+
+                var newDepartment = new Department
+                {
+                    Name = department.Name,
+                    Budget = department.Budget,
+                    StartDate = department.StartDate,
+                    StudentId = department.StudentId,
+                    Aadress = department.Aadress,
+                    InstructorId = department.InstructorId
+                };
+
+                _context.Departments.Add(newDepartment);
+
+                var oldDepartment = await _context.Departments.FindAsync(id);
+                if (oldDepartment != null)
+                {
+                    _context.Departments.Remove(oldDepartment);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(department);
         }
 

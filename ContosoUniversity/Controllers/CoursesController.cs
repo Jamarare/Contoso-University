@@ -18,24 +18,6 @@ public class CoursesController : Controller
         return View(courses);
     }
 
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Course course)
-    {
-        if (ModelState.IsValid)
-        {
-            _context.Add(course);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        return View(course);
-    }
-
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null) return NotFound();

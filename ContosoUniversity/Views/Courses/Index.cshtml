@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ContosoUniversity.Models.Course>
+<table>
+    @foreach (var course in Model)
+    {
+        <tr>
+            <td>@course.Title</td>
+            <td>@course.Credits</td>
+            <td>
+            </td>
+        </tr>
+    }
+</table>
+

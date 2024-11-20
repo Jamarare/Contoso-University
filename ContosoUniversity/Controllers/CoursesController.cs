@@ -37,6 +37,16 @@ public class CoursesController : Controller
         return View(course);
     }
 
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var course = await _context.Courses.FirstOrDefaultAsync(c => c.CourseID == id);
+        if (course == null) return NotFound();
+
+        return View(course);
+    }
+
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null) return NotFound();

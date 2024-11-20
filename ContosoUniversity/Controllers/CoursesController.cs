@@ -1,6 +1,7 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 public class CoursesController : Controller
@@ -16,6 +17,24 @@ public class CoursesController : Controller
     {
         var courses = await _context.Courses.ToListAsync();
         return View(courses);
+    }
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(Course course)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Add(course);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        return View(course);
     }
 
     public async Task<IActionResult> Details(int? id)

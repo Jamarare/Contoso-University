@@ -6,6 +6,8 @@
             <td>@course.Title</td>
             <td>@course.Credits</td>
             <td>
+                <a asp-action="Details" asp-route-id="@course.CourseID" asp-route-action="Details">Details</a>
+                <a asp-action="Delete" asp-route-id="@course.CourseID" asp-route-action="Delete">Delete</a>
             </td>
         </tr>
     }

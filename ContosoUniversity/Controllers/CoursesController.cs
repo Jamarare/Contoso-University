@@ -121,4 +121,25 @@ public class CoursesController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public IActionResult Clone(int id)
+    {
+        var course = _context.Courses
+            .FirstOrDefault(m => m.CourseID == id);
+
+        if (course == null)
+        {
+            return NotFound();
+        }
+
+        var clonedCourse = new Course
+        {
+            Title = course.Title,
+            Credits = course.Credits,
+        };
+
+        _context.Add(clonedCourse);
+        _context.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
+    }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20240930114415_blablablabloblo")]
-    partial class blablablabloblo
+    [Migration("20241122102006_wbhaonsddwaf")]
+    partial class wbhaonsddwaf
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,10 @@ namespace ContosoUniversity.Migrations
             modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
                 {
                     b.Property<int>("CourseID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseID"));
 
                     b.Property<int>("Credits")
                         .HasColumnType("int");
@@ -58,10 +61,7 @@ namespace ContosoUniversity.Migrations
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstructorID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IstructorID")
+                    b.Property<int?>("InstructorID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -82,14 +82,12 @@ namespace ContosoUniversity.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"));
 
                     b.Property<string>("Aadress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Budget")
                         .HasColumnType("Money");
 
                     b.Property<int?>("InstructorId")
-                        .HasMaxLength(30)
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -98,14 +96,12 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<byte?>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("tinyint");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("DepartmentId");
@@ -151,7 +147,7 @@ namespace ContosoUniversity.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("Birthday")
+                    b.Property<int?>("Birthday")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstMidName")
@@ -171,7 +167,7 @@ namespace ContosoUniversity.Migrations
                     b.Property<int?>("NicotineNeeded")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkYears")
+                    b.Property<int?>("WorkYears")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -233,15 +229,11 @@ namespace ContosoUniversity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ContosoUniversity.Models.Instructor", "Instructor")
+                    b.HasOne("ContosoUniversity.Models.Instructor", null)
                         .WithMany("CourseAssignments")
-                        .HasForeignKey("InstructorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InstructorID");
 
                     b.Navigation("Course");
-
-                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Department", b =>
@@ -252,9 +244,7 @@ namespace ContosoUniversity.Migrations
 
                     b.HasOne("ContosoUniversity.Models.Student", "Status")
                         .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Administrator");
 

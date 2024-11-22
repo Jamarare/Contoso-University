@@ -19,62 +19,7 @@ public class CoursesController : Controller
         return View(courses);
     }
 
-    public IActionResult Create()
-    {
-        return View("CreateEdit", new Course());
-    }
-
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var course = await _context.Courses.FindAsync(id);
-        if (course == null)
-        {
-            return NotFound();
-        }
-
-        return View("CreateEdit", course);
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Save(Course course)
-    {
-        if (!ModelState.IsValid)
-        {
-            return View("CreateEdit", course);
-        }
-
-        if (course.CourseID == 0)
-        {
-            _context.Add(course);
-        }
-        else
-        {
-            try
-            {
-                _context.Update(course);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Courses.Any(e => e.CourseID == course.CourseID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
+    
 
 
 
